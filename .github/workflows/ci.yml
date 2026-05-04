@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: MegaLinter
+      uses: oxsecurity/megalinter@v9
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

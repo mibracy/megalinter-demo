@@ -1,0 +1,27 @@
+development:
+  host: localhost
+  port: 3000
+  debug: true
+
+production:
+  host: 0.0.0.0
+  port: 8080
+  debug: false
+
+database:
+  host: localhost
+  port: 5432
+  username: admin
+  password: secret123
+  name: myapp
+
+features:
+  - name: auth
+    enabled: true
+  - name: logging
+    enabled: false
+
+custom:
+  api_key: abc123!@#
+  secret_token: xyz789
+  timeout: 30
