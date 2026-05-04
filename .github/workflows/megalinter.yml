@@ -3,13 +3,11 @@ name: MegaLinter
 on:
   pull_request:
     branches: [main]
-    types: [opened, synchronize, reopened]
   push:
     branches: [main]
 
 permissions:
   contents: read
-  pull-requests: read
   statuses: write
 
 jobs:
@@ -27,7 +25,7 @@ jobs:
         uses: oxsecurity/megalinter@8fbdead70d1409964ab3d5afa885e18ee85388bb # v9.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Always validate all files
+          DEFAULT_WORKSPACE: ${{ github.workspace }}
           VALIDATE_ALL_CODEBASE: true
 
       - name: Upload MegaLinter artifacts
@@ -35,6 +33,5 @@ jobs:
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: megalinter-reports
-          path: |
-            megalinter-reports/
+          path: megalinter-reports/
           retention-days: 5
