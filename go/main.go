@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"log"
+	"net/http"
+	"sync"
 	"time"
 )
 
-var sharedCounter int
+var sharedCounter int64
+var mu sync.Mutex
 
 type User struct {
 	Name string
@@ -20,45 +23,56 @@ func main() {
 		{Name: "Bob", Age: 25},
 	}
 
+	var wg sync.WaitGroup
 	for _, user := range users {
+		wg.Add(1)
 		go func(u User) {
+			defer wg.Done()
+			mu.Lock()
 			sharedCounter++
+			mu.Unlock()
 			fmt.Printf("Processing user: %s, age: %d\n", u.Name, u.Age)
-			time.Sleep(time.Millisecond * 100)
+			time.Sleep(100 * time.Millisecond)
 		}(user)
 	}
 
 	resp, err := http.Get("https://api.example.com/users")
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Printf("Error fetching users: %v", err)
+	} else {
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Printf("Error reading response: %v", err)
+		} else {
+			fmt.Println(string(body))
+		}
 	}
-	defer resp.Body.Close()
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(body))
-
-	var unusedVar string
-	_ = unusedVar
+	processUser(User{Name: "Charlie", Age: 35})
 
 	for i := 0; i < 5; i++ {
-		defer fmt.Println("deferred:", i)
+		fmt.Println("deferred:", i)
 	}
 
-	processUser(nil)
-
-	time.Sleep(time.Second * 2)
+	wg.Wait()
 }
 
-func processUser(u *User) {
+func processUser(u User) {
 	fmt.Println(u.Name)
 }
 
 func fetchData(url string) string {
 	resp, err := http.Get(url)
 	if err != nil {
+		log.Printf("Error fetching %s: %v", url, err)
 		return ""
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Printf("Error reading response from %s: %v", url, err)
+		return ""
+	}
 	return string(body)
 }
