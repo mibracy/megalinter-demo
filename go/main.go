@@ -1,15 +1,15 @@
+// Package main implements a demo for MegaLinter fixes.
 package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"sync"
 	"time"
 )
 
-var sharedCounter int64
 var mu sync.Mutex
 
 type User struct {
@@ -41,7 +41,7 @@ func main() {
 		log.Printf("Error fetching users: %v", err)
 	} else {
 		defer resp.Body.Close()
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 		if err != nil {
 			log.Printf("Error reading response: %v", err)
 		} else {

@@ -1,5 +1,5 @@
-import json
-from typing import List, Dict
+"""Main module for demonstrating MegaLinter fixes."""
+from typing import List
 
 
 def process_data(data: List[int]) -> List[int]:
@@ -12,10 +12,14 @@ def process_data(data: List[int]) -> List[int]:
 
 
 def fetch_url(url: str) -> bytes:
-    """Fetch data from URL."""
+    """Fetch data from URL safely."""
     import urllib.request
-    response = urllib.request.urlopen(url)
-    return response.read()
+    import urllib.error
+    try:
+        response = urllib.request.urlopen(url, timeout=10)
+        return response.read()
+    except urllib.error.URLError as e:
+        raise ConnectionError(f"Failed to fetch {url}: {e}")
 
 
 def main() -> None:
