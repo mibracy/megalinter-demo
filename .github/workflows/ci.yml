@@ -23,10 +23,10 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --prefix config
 
       - name: Run tests
-        run: npm test
+        run: npm test --prefix config
 
       - name: MegaLinter
         uses: oxsecurity/megalinter@8fbdead70d1409964ab3d5afa885e18ee85388bb # v9.4.0
