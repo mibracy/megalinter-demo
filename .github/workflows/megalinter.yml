@@ -32,7 +32,7 @@ jobs:
 
       - name: Upload MegaLinter artifacts
         if: always()
-        uses: actions/upload-artifact@ea165f8f309081b5166a48b4c5def16a3d28ad6e # v4.2.0
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: megalinter-reports
           path: |
