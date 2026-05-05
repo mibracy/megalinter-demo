@@ -1,0 +1,7 @@
+---
+# Using defaults
+DISABLE:
+  - SPELL
+  - COPYPASTE
+
+SHOW_ELAPSED_TIME: true
