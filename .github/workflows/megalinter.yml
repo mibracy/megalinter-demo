@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
   statuses: write
+  issues: write
+  pull-requests: write
+
 
 jobs:
   megalinter:
@@ -25,7 +28,6 @@ jobs:
         uses: oxsecurity/megalinter@8fbdead70d1409964ab3d5afa885e18ee85388bb # v9.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_WORKSPACE: ${{ github.workspace }}
           VALIDATE_ALL_CODEBASE: true
 
       - name: Upload MegaLinter artifacts
