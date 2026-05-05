@@ -1,0 +1,6 @@
+[0000]  WARN no explicit name and version provided for directory source, deriving artifact ID from the given path (which is not ideal)
+NAME                         VERSION  TYPE           
+actions/checkout             v5.0.0   github-action  
+actions/upload-artifact      v5.0.0   github-action  
+github.com/stretchr/testify  v1.9.0   go-module      
+oxsecurity/megalinter        v9.4.0   github-action
