@@ -1,0 +1,7 @@
+---
+# Using defaults - no ENABLE list means all default linters run
+DISABLE:
+  - COPYPASTE
+  - SPELL
+
+SHOW_ELAPSED_TIME: true
