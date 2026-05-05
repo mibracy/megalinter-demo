@@ -1,5 +1,5 @@
 development:
-  host: localhost
+  host: "app-host"
   port: 3000
   debug: true
 
@@ -9,7 +9,7 @@ production:
   debug: false
 
 database:
-  host: localhost
+  host: "db-host"
   port: 5432
   username: admin
   password: "secret123"

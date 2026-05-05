@@ -1,4 +1,5 @@
 """Main module for demonstrating MegaLinter fixes."""
+
 from typing import List
 
 
@@ -13,10 +14,14 @@ def process_data(data: List[int]) -> List[int]:
 
 def fetch_url(url: str) -> bytes:
     """Fetch data from URL safely."""
-    import urllib.request
     import urllib.error
+    import urllib.request
+
+    if not url.startswith(("http://", "https://")):
+        raise ValueError(f"Invalid URL scheme: {url}")
+
     try:
-        response = urllib.request.urlopen(url, timeout=10)
+        response = urllib.request.urlopen(url, timeout=10)  # nosec B310
         return response.read()
     except urllib.error.URLError as e:
         raise ConnectionError(f"Failed to fetch {url}: {e}")

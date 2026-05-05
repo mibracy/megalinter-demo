@@ -12,11 +12,16 @@ import java.util.concurrent.TimeUnit;
 /**
  * Main class for demonstrating MegaLinter fixes.
  */
-public final class Main {
+public final class MainApplication {
+    /** Maximum number of threads. */
     private static final int MAX_THREADS = 100;
+    /** Short sleep duration in milliseconds. */
     private static final int SHORT_SLEEP_MS = 1000;
+    /** Timeout for awaiting termination in seconds. */
     private static final int AWAIT_TIMEOUT = 5;
+    /** Cache for storing items. */
     private static final List<String> CACHE = new ArrayList<>();
+    /** Counter for tracking operations. */
     private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
     /**
@@ -42,10 +47,11 @@ public final class Main {
         incrementCounter();
         incrementCounter();
 
-        ExecutorService executor = Executors.newFixedThreadPool(MAX_THREADS);
+        final ExecutorService executor =
+            Executors.newFixedThreadPool(MAX_THREADS);
         for (int i = 0; i < MAX_THREADS; i++) {
             executor.submit(() -> {
-                int current = COUNTER.incrementAndGet();
+                 final int current = COUNTER.incrementAndGet();
                 synchronized (CACHE) {
                     CACHE.add("item-" + current);
                 }
@@ -58,7 +64,7 @@ public final class Main {
             Thread.currentThread().interrupt();
         }
 
-        String response = fetchData("https://example.com");
+        final String response = fetchData("https://example.com");
         System.out.println(response);
     }
 
@@ -94,7 +100,7 @@ public final class Main {
     /**
      * Private constructor to prevent instantiation.
      */
-    private Main() {
+    private MainApplication() {
         // Utility class, prevent instantiation
     }
 }

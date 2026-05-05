@@ -4,27 +4,27 @@ This document shows all the fixes applied to resolve MegaLinter issues. The `fix
 
 ## Summary of Fixes by Language
 
-| Language/Tool | Linter | Main Errors | Fix Status |
-|----------------|--------|---------------|------------|
-| **JAVA** | checkstyle | 23 | ✅ Fixed |
-| **JAVA** | pmd | 8 | ✅ Fixed |
-| **GO** | golangci-lint | 1 | ✅ Fixed (added go.mod) |
-| **GO** | revive | 1 | ✅ Fixed (added package comment) |
-| **JAVASCRIPT** | standard | 17 | ✅ Fixed |
-| **TYPESCRIPT** | ts-standard | 1 | ✅ Fixed (added tsconfig.json) |
-| **PYTHON** | ruff | 5 | ✅ Fixed (removed unused imports) |
-| **PYTHON** | bandit | 1 | ✅ Fixed (proper urlopen handling) |
-| **PYTHON** | flake8 | 33 | ✅ Fixed (PEP8 compliance) |
-| **JSON** | jsonlint | 1 | ✅ Fixed (removed trailing comma) |
-| **YAML** | yamllint | 14 | ✅ Fixed (proper formatting) |
-| **YAML** | v8r | 1 | ✅ Fixed (.mega-linter.yml syntax) |
-| **MARKDOWN** | markdownlint | 19 | ✅ Fixed (code blocks, tables) |
-| **DOCKERFILE** | hadolint | 1 | ✅ Fixed (proper casing) |
-| **REPOSITORY** | kics | 4 | ✅ Fixed (USER, HEALTHCHECK, pin tags) |
-| **REPOSITORY** | checkov | 3 | ✅ Fixed (USER, tag, permissions) |
-| **REPOSITORY** | trivy | 1 | ✅ Fixed (Dockerfile misconfigs) |
-| **BASH** | shellcheck | 1 | ✅ Fixed (added shebang) |
-| **BASH** | shfmt | 1 | ✅ Fixed (proper formatting) |
+| Language/Tool  | Linter        | Main Errors | Fix Status                            |
+#!|----------------|----------------|-------------|---------------------------------------|
+| **JAVA**        checkstyle     23           | Fixed                               
+| **JAVA**        pmd            8            | Fixed                               
+| **GO**          golangci-lint  1            | Fixed (added go.mod)                
+| **GO**          revive         1            | Fixed (added package comment)       
+| **JAVASCRIPT**  standard       17           | Fixed                               
+| **TYPESCRIPT**  ts-standard    1            | Fixed (added tsconfig.json)         
+| **PYTHON**      ruff           5            | Fixed (removed unused imports)      
+| **PYTHON**      bandit         1            | Fixed (proper urlopen handling)     
+| **PYTHON**      flake8         33           | Fixed (PEP8 compliance)             
+| **JSON**        jsonlint       1            | Fixed (removed trailing comma)      
+| **YAML**        yamllint       14           | Fixed (proper formatting)           
+| **YAML**        v8r            1            | Fixed (.mega-linter.yml syntax)     
+| **MARKDOWN**    markdownlint   19           | Fixed (code blocks, tables)         
+| **DOCKERFILE**  hadolint       1            | Fixed (proper casing)               
+| **REPOSITORY**  kics           4            | Fixed (USER, HEALTHCHECK, pin tags) 
+| **REPOSITORY**  checkov        3            | Fixed (USER, tag, permissions)      
+| **REPOSITORY**  trivy          1            | Fixed (Dockerfile misconfigs)       
+| **BASH**        shellcheck     1            | Fixed (added shebang)               
+| **BASH**        shfmt          1            | Fixed (proper formatting)           
 
 ---
 
@@ -676,8 +676,8 @@ main:
 npx megalinter-runner  # Missing language specifier
 ```
 
-| Branch | Description |
-|--------|-------------|
+| Branch | Description     |
+|--------|-----------------|
 | `main` | Contains errors |
   # Bad table formatting (missing spaces)
 
@@ -689,9 +689,10 @@ npx megalinter-runner  # Missing language specifier
 npx megalinter-runner
 ```
 
-| Branch | Description |
-|--------|-------------|
+| Branch | Description     |
+|--------|-----------------|
 | `main` | Contains errors |
+
 ```
 
 ### Key Fixes Applied
@@ -883,7 +884,7 @@ npm start
 ## Proof: Running MegaLinter on Fix Branch
 
 ```bash
-$ docker run --rm -v $(pwd):/tmp/lint oxsecurity/megalinter:v9
+docker run --rm -v $(pwd):/tmp/lint oxsecurity/megalinter:v9
 ```
 
 Expected output (after fixes):
