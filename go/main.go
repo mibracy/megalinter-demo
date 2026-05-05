@@ -28,9 +28,6 @@ func main() {
 		wg.Add(1)
 		go func(u User) {
 			defer wg.Done()
-			mu.Lock()
-			// sharedCounter++ // removed
-			mu.Unlock()
 			fmt.Printf("Processing user: %s, age: %d\n", u.Name, u.Age)
 			time.Sleep(100 * time.Millisecond)
 		}(user)
@@ -62,17 +59,4 @@ func processUser(u User) {
 	fmt.Println(u.Name)
 }
 
-func fetchData(url string) string {
-	resp, err := http.Get(url)
-	if err != nil {
-		log.Printf("Error fetching %s: %v", url, err)
-		return ""
-	}
-	defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Printf("Error reading response from %s: %v", url, err)
-		return ""
-	}
-	return string(body)
-}
+// fetchData function removed - was unused
