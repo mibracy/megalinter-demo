@@ -29,7 +29,7 @@ func main() {
 		go func(u User) {
 			defer wg.Done()
 			mu.Lock()
-			sharedCounter++
+			// sharedCounter++ // removed
 			mu.Unlock()
 			fmt.Printf("Processing user: %s, age: %d\n", u.Name, u.Age)
 			time.Sleep(100 * time.Millisecond)
@@ -69,7 +69,7 @@ func fetchData(url string) string {
 		return ""
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Printf("Error reading response from %s: %v", url, err)
 		return ""
