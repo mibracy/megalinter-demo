@@ -1,6 +1,15 @@
 // Package main implements a demo for MegaLinter fixes.
 package main
 
+import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"sync"
+	"time"
+)
+
 type User struct {
 	Name string
 	Age  int
