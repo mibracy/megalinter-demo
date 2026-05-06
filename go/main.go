@@ -1,17 +1,6 @@
 // Package main implements a demo for MegaLinter fixes.
 package main
 
-import (
-	"fmt"
-	"io"
-	"log"
-	"net/http"
-	"sync"
-	"time"
-)
-
-var mu sync.Mutex
-
 type User struct {
 	Name string
 	Age  int
