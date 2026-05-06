@@ -1,0 +1,20 @@
+{
+    "recommendations": [
+        "exiasr.hadolint",
+        "shengchen.vscode-checkstyle",
+        "ms-python.python",
+        "timonwong.shellcheck",
+        "charliermarsh.ruff",
+        "standard.vscode-standard",
+        "foxundermoon.shell-format",
+        "matangover.mypy",
+        "esbenp.prettier-vscode",
+        "ms-vscode.Go",
+        "AquaSecurityOfficial.trivy-vulnerability-scanner",
+        "ms-python.flake8",
+        "MS-CST-E.vscode-devskim",
+        "ms-pyright.pyright",
+        "pycqa.bandit-pycqa",
+        "ms-python.pylint"
+    ]
+}

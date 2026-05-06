@@ -1,13 +1,14 @@
+// Package main implements a demo for MegaLinter fixes.
 package main
 
 import (
 	"fmt"
+	"io"
+	"log"
 	"net/http"
-	"io/ioutil"
+	"sync"
 	"time"
 )
-
-var sharedCounter int
 
 type User struct {
 	Name string
@@ -20,45 +21,40 @@ func main() {
 		{Name: "Bob", Age: 25},
 	}
 
+	var wg sync.WaitGroup
 	for _, user := range users {
+		wg.Add(1)
 		go func(u User) {
-			sharedCounter++
+			defer wg.Done()
 			fmt.Printf("Processing user: %s, age: %d\n", u.Name, u.Age)
-			time.Sleep(time.Millisecond * 100)
+			time.Sleep(100 * time.Millisecond)
 		}(user)
 	}
 
 	resp, err := http.Get("https://api.example.com/users")
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Printf("Error fetching users: %v", err)
+	} else {
+		defer resp.Body.Close()
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Printf("Error reading response: %v", err)
+		} else {
+			fmt.Println(string(body))
+		}
 	}
-	defer resp.Body.Close()
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(body))
-
-	var unusedVar string
-	_ = unusedVar
+	processUser(User{Name: "Charlie", Age: 35})
 
 	for i := 0; i < 5; i++ {
-		defer fmt.Println("deferred:", i)
+		fmt.Println("deferred:", i)
 	}
 
-	processUser(nil)
-
-	time.Sleep(time.Second * 2)
+	wg.Wait()
 }
 
-func processUser(u *User) {
+func processUser(u User) {
 	fmt.Println(u.Name)
 }
 
-func fetchData(url string) string {
-	resp, err := http.Get(url)
-	if err != nil {
-		return ""
-	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	return string(body)
-}
+// fetchData function removed - was unused

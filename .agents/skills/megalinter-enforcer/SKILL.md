@@ -18,19 +18,19 @@ Use this skill when:
 
 ## Supported Languages & Tools
 
-| Language/Tool | Linters Used |
-|---------------|--------------|
-| Java | PMD, Checkstyle, SpotBugs |
-| Go | go vet, golint, gofmt, gocyclo |
-| JavaScript | ESLint, Prettier |
-| TypeScript | ESLint, Prettier |
-| Python | Pylint, Flake8, Black |
-| YAML | yamllint |
-| JSON | jsonlint |
-| Markdown | markdownlint |
-| Shell | shfmt |
-| Docker | hadolint |
-| GitHub Actions | actionlint |
+| Language/Tool  | Linters Used                   |
+|----------------|--------------------------------|
+| Java           | PMD, Checkstyle, SpotBugs      |
+| Go             | go vet, golint, gofmt, gocyclo |
+| JavaScript     | ESLint, Prettier               |
+| TypeScript     | ESLint, Prettier               |
+| Python         | Pylint, Flake8, Black          |
+| YAML           | yamllint                       |
+| JSON           | jsonlint                       |
+| Markdown       | markdownlint                   |
+| Shell          | shfmt                          |
+| Docker         | hadolint                       |
+| GitHub Actions | actionlint                     |
 
 ## Step-by-Step Workflow
 
@@ -69,7 +69,7 @@ npx mega-linter-runner -p java/ --filesonly java/Main.java
 ### Step 3: Parse and Categorize Errors
 
 MegaLinter outputs errors in this format:
-```
+```text
 [MAIN] Scanning all files...
 [JAVA_PMD] Found 5 issues in java/Main.java
   - Line 8: Avoid unused imports
@@ -393,7 +393,7 @@ npx mega-linter-runner
 ```
 
 If all issues are resolved, you'll see:
-```
+```text
 [MAIN] All files passed linting!
 ```
 
@@ -437,14 +437,14 @@ APPLY_FIXES: all  # Or list specific linters: [JAVASCRIPT_ES, PYTHON_BLACK]
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| MegaLinter not found | Run `npm install mega-linter-runner -g` |
+| Issue                    | Solution                                                  |
+|--------------------------|-----------------------------------------------------------|
+| MegaLinter not found     | Run `npm install mega-linter-runner -g`                   |
 | Docker permission denied | Add user to docker group: `sudo usermod -aG docker $USER` |
-| Too many errors to fix | Use `APPLY_FIXES: all` for auto-fixable issues first |
-| Java linters failing | Ensure Java is installed: `java -version` |
-| Go linters failing | Ensure Go is installed: `go version` |
-| False positives | Disable specific linters in `.mega-linter.yml` |
+| Too many errors to fix   | Use `APPLY_FIXES: all` for auto-fixable issues first      |
+| Java linters failing     | Ensure Java is installed: `java -version`                 |
+| Go linters failing       | Ensure Go is installed: `go version`                      |
+| False positives          | Disable specific linters in `.mega-linter.yml`            |
 
 ## Project-Specific Notes
 

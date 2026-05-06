@@ -1,0 +1,20 @@
+Results of golangci-lint linter (version 2.10.1)
+See documentation on https://megalinter.io/9.4.0/descriptors/go_golangci_lint/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /tmp/lint
+Linter raw log:
+../../..go/main.go:72:1: File is not properly formatted (gofmt)
+		body, err := io.ReadAll(resp.Body)
+^
+../../..go/main.go:33:4: SA2001: empty critical section (staticcheck)
+			mu.Unlock()
+			^
+../../..go/main.go:65:6: func fetchData is unused (unused)
+func fetchData(url string) string {
+     ^
+3 issues:
+* gofmt: 1
+* staticcheck: 1
+* unused: 1
+

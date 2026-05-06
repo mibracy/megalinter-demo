@@ -1,0 +1,9 @@
+Results of standard linter (version 17.1.2)
+See documentation on https://megalinter.io/9.4.0/descriptors/javascript_standard/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /tmp/lint
+Linter raw log:
+standard: Use JavaScript Standard Style (https://standardjs.com)
+  src/index.js:13:10: 'multiply' is defined but never used. (no-unused-vars)
+

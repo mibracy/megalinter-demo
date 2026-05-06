@@ -1,0 +1,39 @@
+name: MegaLinter
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  statuses: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  megalinter:
+    name: MegaLinter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Run MegaLinter
+        uses: oxsecurity/megalinter@8fbdead70d1409964ab3d5afa885e18ee85388bb # v9.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: "true"
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+      - name: Upload MegaLinter artifacts
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: megalinter-reports
+          path: megalinter-reports/
+          retention-days: 5

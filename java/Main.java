@@ -1,67 +1,106 @@
+package com.example;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.TimeUnit;
 
-public class Main {
-    private static List<String> cache = new ArrayList<>();
-    private static int counter = 0;
-    
-    public static void main(String[] args) {
+/**
+ * Main class for demonstrating MegaLinter fixes.
+ */
+public final class MainApplication {
+    /** Maximum number of threads. */
+    private static final int MAX_THREADS = 100;
+    /** Short sleep duration in milliseconds. */
+    private static final int SHORT_SLEEP_MS = 1000;
+    /** Timeout for awaiting termination in seconds. */
+    private static final int AWAIT_TIMEOUT = 5;
+    /** Cache for storing items. */
+    private static final List<String> CACHE = new ArrayList<>();
+    /** Counter for tracking operations. */
+    private static final AtomicInteger COUNTER = new AtomicInteger(0);
+
+    /**
+     * Main method.
+     * @param args command line arguments
+     */
+    public static void main(final String[] args) {
         System.out.println("Hello World");
-        
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream("/tmp/test.txt");
+
+        try (FileInputStream fis = new FileInputStream("/tmp/test.txt")) {
             int data = fis.read();
-            while(data != -1){
+            while (data != -1) {
                 System.out.println((char) data);
                 data = fis.read();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error reading file: " + e.getMessage());
         }
-        
-        processData(null);
-        
+
+        processData("test");
+
         incrementCounter();
         incrementCounter();
         incrementCounter();
-        
-        ExecutorService executor = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 100; i++) {
+
+        final ExecutorService executor =
+            Executors.newFixedThreadPool(MAX_THREADS);
+        for (int i = 0; i < MAX_THREADS; i++) {
             executor.submit(() -> {
-                counter++;
-                cache.add("item-" + counter);
+                 final int current = COUNTER.incrementAndGet();
+                synchronized (CACHE) {
+                    CACHE.add("item-" + current);
+                }
             });
         }
         executor.shutdown();
-        
-        URL url = new URL("http://example.com");
-        String response = fetchData(url);
+        try {
+            executor.awaitTermination(AWAIT_TIMEOUT, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        final String response = fetchData("https://example.com");
         System.out.println(response);
     }
-    
-    private static void processData(String input) {
-        if (input.equals("test")) {
+
+    /**
+     * Process data if input is valid.
+     * @param input the input string
+     */
+    private static void processData(final String input) {
+        if (input != null && input.equals("test")) {
             System.out.println("Matched!");
         }
     }
-    
+
     private static void incrementCounter() {
-        counter++;
+        COUNTER.incrementAndGet();
     }
-    
-    private static String fetchData(URL url) {
+
+    /**
+     * Fetch data from URL.
+     * @param url the URL to fetch
+     * @return the response as string
+     */
+    private static String fetchData(final String url) {
         try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
+            Thread.sleep(SHORT_SLEEP_MS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Sleep interrupted: " + e.getMessage());
         }
         return "data";
+    }
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private MainApplication() {
+        // Utility class, prevent instantiation
     }
 }

@@ -1,18 +1,18 @@
 development:
-  host: localhost
+  host: "app-host"
   port: 3000
   debug: true
 
 production:
-  host: 0.0.0.0
+  host: "0.0.0.0"
   port: 8080
   debug: false
 
 database:
-  host: localhost
+  host: "db-host"
   port: 5432
   username: admin
-  password: secret123
+  password: "secret123"
   name: myapp
 
 features:
@@ -22,6 +22,6 @@ features:
     enabled: false
 
 custom:
-  api_key: abc123!@#
-  secret_token: xyz789
+  api_key: "abc123!@#"
+  secret_token: "xyz789"
   timeout: 30

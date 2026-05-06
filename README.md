@@ -31,10 +31,10 @@ linter/
 
 ## 🌿 Git Branches
 
-| Branch | Description |
-|--------|-------------|
-| `main` | Contains **intentional lint errors** to demonstrate MegaLinter detection |
-| `fix/megalinter-issues` | Contains **fixed versions** of all files, passing all linters |
+| Branch                  | Description                                                              |
+|-------------------------|--------------------------------------------------------------------------|
+| `main`                  | Contains **intentional lint errors** to demonstrate MegaLinter detection |
+| `fix/megalinter-issues` | Contains **fixed versions** of all files, passing all linters            |
 
 ## 🚀 Quick Start
 
@@ -147,19 +147,19 @@ The project includes a custom OpenCode skill at `.agents/skills/megalinter-enfor
 
 The `.mega-linter.yml` file enables these linters:
 
-| Language | Linters |
-|----------|---------|
-| Java | PMD, Checkstyle, SpotBugs |
-| Go | go vet, golint, gofmt, gocyclo |
-| JavaScript | ESLint, Prettier |
-| TypeScript | ESLint, Prettier |
-| Python | Pylint, Flake8, Black |
-| YAML | yamllint |
-| JSON | jsonlint |
-| Markdown | markdownlint |
-| Shell | shfmt |
-| Docker | hadolint |
-| GitHub Actions | actionlint |
+| Language       | Linters                        |
+|----------------|--------------------------------|
+| Java           | PMD, Checkstyle, SpotBugs      |
+| Go             | go vet, golint, gofmt, gocyclo |
+| JavaScript     | ESLint, Prettier               |
+| TypeScript     | ESLint, Prettier               |
+| Python         | Pylint, Flake8, Black          |
+| YAML           | yamllint                       |
+| JSON           | jsonlint                       |
+| Markdown       | markdownlint                   |
+| Shell          | shfmt                          |
+| Docker         | hadolint                       |
+| GitHub Actions | actionlint                     |
 
 ## 🔗 Resources
 

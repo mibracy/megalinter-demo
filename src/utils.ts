@@ -1,28 +1,28 @@
-export function greet(name: any): any {
-  return "Hello " + name;
+export function greet (name: string): string {
+  return 'Hello ' + name
 }
 
-export const config: any = {
+export const config: { timeout: number, retries: number } = {
   timeout: 5000,
-  retries: 3,
-};
+  retries: 3
+}
 
-export function processData(data: any) {
-  return data;
+export function processData (data: Record<string, unknown>): Record<string, unknown> {
+  return data
 }
 
 export class UserManager {
-  private users: any[] = [];
+  private readonly users: Array<Record<string, unknown>> = []
 
-  addUser(user: any): void {
-    this.users.push(user);
+  addUser (user: Record<string, unknown>): void {
+    this.users.push(user)
   }
 
-  getUsers(): any[] {
-    return this.users;
+  getUsers (): Array<Record<string, unknown>> {
+    return this.users
   }
 }
 
-export function calculate(a: any, b: any) {
-  return a + b;
+export function calculate (a: number, b: number): number {
+  return a + b
 }
